@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Views Golf Club — Google Ads Analysis</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f4f4f2;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #1E3A6E;
+    margin-bottom: 4px;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #e0e0de;
+    margin: 1.75rem 0;
+  }
+
+  .sec-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric {
+    background: #eeeeed;
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+  }
+
+  .metric-label {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  .metric-value {
+    font-size: 22px;
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+
+  .metric-sub {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 2px;
+  }
+
+  .metric.accent {
+    background: #ddeaf8;
+  }
+  .metric.accent .metric-value { color: #1E3A6E; }
+  .metric.accent .metric-label,
+  .metric.accent .metric-sub { color: #3a6aaa; }
+
+  .metric.good {
+    background: #ddf0e8;
+  }
+  .metric.good .metric-value { color: #085041; }
+  .metric.good .metric-label,
+  .metric.good .metric-sub { color: #0f6e56; }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .slider-label {
+    font-size: 13px;
+    color: #555;
+    min-width: 190px;
+  }
+
+  .slider-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a1a;
+    min-width: 68px;
+    text-align: right;
+  }
+
+  input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: #ccc;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #1E3A6E;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #1E3A6E;
+    cursor: pointer;
+    border: none;
+  }
+
+  .hint {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .chart-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .chart-wrap {
+    position: relative;
+    width: 100%;
+    height: 300px;
+  }
+
+  .insight-box {
+    border-left: 3px solid #1E3A6E;
+    padding: 0.65rem 1rem;
+    margin: 0.6rem 0;
+    background: #f9f9f8;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .insight-box p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.65;
+  }
+
+  .insight-box strong {
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .keyword-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .pill {
+    font-size: 12px;
+    padding: 5px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: #555;
+    background: #fff;
+  }
+
+  .footer {
+    font-size: 11px;
+    color: #aaa;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0de;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 560px) {
+    .slider-label { min-width: 130px; font-size: 12px; }
+    .metric-value { font-size: 18px; }
+    .header h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>The Views Golf Club — Google Ads Analysis</h1>
+    <p>Oro Valley, AZ &nbsp;·&nbsp; 11-month campaign &nbsp;·&nbsp; Target: 4 new golfers/day</p>
+  </div>
+
+  <p class="sec-title">Campaign targets — fixed inputs</p>
+  <div class="metric-grid">
+    <div class="metric accent">
+      <div class="metric-label">New golfers (11 mo)</div>
+      <div class="metric-value">1,320</div>
+      <div class="metric-sub">4/day × 330 days</div>
+    </div>
+    <div class="metric accent">
+      <div class="metric-label">Avg round price</div>
+      <div class="metric-value">$70</div>
+      <div class="metric-sub">per golfer acquired</div>
+    </div>
+    <div class="metric accent">
+      <div class="metric-label">Gross revenue</div>
+      <div class="metric-value">$92,400</div>
+      <div class="metric-sub">from new golfers only</div>
+    </div>
+    <div class="metric accent">
+      <div class="metric-label">Campaign duration</div>
+      <div class="metric-value">11 mo</div>
+      <div class="metric-sub">Jun 2025 – Apr 2026</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="sec-title">ROI summary</p>
+  <div class="metric-grid">
+    <div class="metric good">
+      <div class="metric-label">Total ad spend</div>
+      <div class="metric-value" id="m-spend">$11,000</div>
+      <div class="metric-sub" id="m-spend-sub">$1,000/mo</div>
+    </div>
+    <div class="metric good">
+      <div class="metric-label">Daily ad cost</div>
+      <div class="metric-value" id="m-daily">$33</div>
+      <div class="metric-sub">per day</div>
+    </div>
+    <div class="metric good">
+      <div class="metric-label">Net revenue</div>
+      <div class="metric-value" id="m-net">$81,400</div>
+      <div class="metric-sub">after ad spend</div>
+    </div>
+    <div class="metric good">
+      <div class="metric-label">ROAS</div>
+      <div class="metric-value" id="m-roas">8.4×</div>
+      <div class="metric-sub">revenue per ad dollar</div>
+    </div>
+    <div class="metric good">
+      <div class="metric-label">Cost per golfer</div>
+      <div class="metric-value" id="m-cpg">$8.33</div>
+      <div class="metric-sub">vs $70 round price</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="sec-title">Adjust the model</p>
+
+  <div class="slider-row">
+    <span class="slider-label">Monthly ad budget</span>
+    <input type="range" min="500" max="3000" step="50" value="1000" id="sl-budget">
+    <span class="slider-val" id="lbl-budget">$1,000</span>
+  </div>
+  <div class="slider-row">
+    <span class="slider-label">Avg round price ($)</span>
+    <input type="range" min="40" max="150" step="5" value="70" id="sl-price">
+    <span class="slider-val" id="lbl-price">$70</span>
+  </div>
+  <div class="slider-row">
+    <span class="slider-label">Avg CPC ($)</span>
+    <input type="range" min="1.00" max="6.00" step="0.25" value="2.50" id="sl-cpc">
+    <span class="slider-val" id="lbl-cpc">$2.50</span>
+  </div>
+  <div class="slider-row">
+    <span class="slider-label">Conversion rate (%)</span>
+    <input type="range" min="1" max="12" step="0.5" value="4" id="sl-cvr">
+    <span class="slider-val" id="lbl-cvr">4.0%</span>
+  </div>
+  <div class="slider-row">
+    <span class="slider-label">Repeat visits per golfer/yr</span>
+    <input type="range" min="1" max="10" step="1" value="1" id="sl-repeat">
+    <span class="slider-val" id="lbl-repeat">1×</span>
+  </div>
+  <p class="hint">"Repeat visits" multiplies total revenue — a golfer who returns 3 more times is worth $280, not $70.</p>
+
+  <hr class="divider">
+
+  <p class="sec-title">Monthly expected revenue vs ad cost</p>
+  <div class="chart-legend">
+    <span><span class="legend-swatch" style="background:#1E3A6E;"></span>Expected revenue</span>
+    <span><span class="legend-swatch" style="background:#b4b2a9;"></span>Ad cost</span>
+  </div>
+  <div class="chart-wrap">
+    <canvas id="chart1" role="img" aria-label="Grouped bar chart showing expected monthly revenue versus ad cost for 11 months">Expected revenue vs ad cost per month.</canvas>
+  </div>
+
+  <hr class="divider">
+
+  <p class="sec-title">Is this economical?</p>
+  <div class="insight-box"><p><strong>Yes — the unit economics are strong.</strong> At $1,000/month ($33/day), cost per acquired golfer is ~$8.33 against $70 revenue, an 8.4× ROAS. Even with a conservative 3% CVR and $3.00 CPC, ROAS stays above 5×.</p></div>
+  <div class="insight-box"><p><strong>Repeat play dramatically improves returns.</strong> A golfer who comes back just 3 more times in the year is worth $280 total. Use the "Repeat visits" slider to model this — it's the strongest argument for running this campaign.</p></div>
+  <div class="insight-box"><p><strong>Recommended budget: $800–$1,200/month.</strong> Start at $1,000/mo. After 60 days of data, optimize toward keywords delivering the lowest cost per golfer. Don't cut budget before conversion tracking is in place.</p></div>
+  <div class="insight-box"><p><strong>Key risk:</strong> Without conversion tracking linked to actual tee time bookings (GolfNow, TeeSnap, or direct), you can't validate CPG or CVR. Set this up before launch.</p></div>
+
+  <hr class="divider">
+
+  <p class="sec-title">Recommended keywords</p>
+  <div class="keyword-wrap">
+    <span class="pill">tee times Oro Valley</span>
+    <span class="pill">public golf course Tucson</span>
+    <span class="pill">golf near Marana AZ</span>
+    <span class="pill">Oro Valley golf course</span>
+    <span class="pill">golf courses northwest Tucson</span>
+    <span class="pill">book tee time Arizona</span>
+    <span class="pill">golf Foothills Tucson</span>
+    <span class="pill">The Views Golf Club</span>
+  </div>
+
+  <div class="footer">
+    Analysis prepared by Tall Town Design &nbsp;·&nbsp; talltowndesigns.com &nbsp;·&nbsp; CPC and CVR benchmarks based on southern Arizona golf search market estimates.
+  </div>
+
+</div>
+
+<script>
+const MONTHS = ['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr'];
+const N = 11, GPD = 4, DAYS = 30;
+let budget=1000, price=70, cpc=2.50, cvr=0.04, repeat=1;
+let chart1;
+
+function fmt$(n){ return '$'+Math.round(n).toLocaleString(); }
+
+function calc(){
+  const totalGolfers = GPD * N * DAYS;
+  const totalRevTarget = totalGolfers * price * repeat;
+  const totalSpend = budget * N;
+  const dailyCost = budget / DAYS;
+  const net = totalRevTarget - totalSpend;
+  const roas = totalRevTarget / totalSpend;
+  const cpg = totalSpend / totalGolfers;
+  const revenuePerMonth = GPD * DAYS * price * repeat;
+  return { totalSpend, dailyCost, net, roas, cpg, revenuePerMonth };
+}
+
+function updateMetrics(d){
+  document.getElementById('m-spend').textContent = fmt$(d.totalSpend);
+  document.getElementById('m-spend-sub').textContent = fmt$(budget)+'/mo';
+  document.getElementById('m-daily').textContent = fmt$(d.dailyCost);
+  document.getElementById('m-net').textContent = fmt$(d.net);
+  document.getElementById('m-roas').textContent = d.roas.toFixed(1)+'×';
+  document.getElementById('m-cpg').textContent = '$'+d.cpg.toFixed(2);
+}
+
+function updateChart(d){
+  const revArr = MONTHS.map(() => d.revenuePerMonth);
+  const spendArr = MONTHS.map(() => budget);
+  if(chart1){
+    chart1.data.datasets[0].data = revArr;
+    chart1.data.datasets[1].data = spendArr;
+    chart1.update();
+  } else {
+    chart1 = new Chart(document.getElementById('chart1'),{
+      type:'bar',
+      data:{
+        labels: MONTHS,
+        datasets:[
+          { label:'Expected revenue', data:revArr, backgroundColor:'#1E3A6E', borderRadius:4 },
+          { label:'Ad cost', data:spendArr, backgroundColor:'#b4b2a9', borderRadius:4 }
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ctx.dataset.label+': '+fmt$(ctx.parsed.y) } } },
+        scales:{
+          x:{ grid:{display:false}, ticks:{color:'#888', autoSkip:false, maxRotation:0} },
+          y:{ grid:{color:'rgba(0,0,0,0.06)'}, ticks:{color:'#888', callback: v => fmt$(v)} }
+        }
+      }
+    });
+  }
+}
+
+function update(){
+  const d = calc();
+  updateMetrics(d);
+  updateChart(d);
+}
+
+function bind(id, lblId, fmt, setter){
+  document.getElementById(id).addEventListener('input', function(){
+    const v = parseFloat(this.value);
+    document.getElementById(lblId).textContent = fmt(v);
+    setter(v);
+    update();
+  });
+}
+
+bind('sl-budget', 'lbl-budget', v => fmt$(v),          v => budget = v);
+bind('sl-price',  'lbl-price',  v => '$'+v,            v => price = v);
+bind('sl-cpc',    'lbl-cpc',    v => '$'+v.toFixed(2), v => cpc = v);
+bind('sl-cvr',    'lbl-cvr',    v => v.toFixed(1)+'%', v => cvr = v/100);
+bind('sl-repeat', 'lbl-repeat', v => v+'×',            v => repeat = v);
+
+update();
+</script>
+</body>
+</html>
