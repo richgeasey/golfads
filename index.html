@@ -138,6 +138,17 @@
     <input type="range" min="40" max="150" step="5" value="70" id="sl-price">
     <span class="slider-val" id="lbl-price">$70</span>
   </div>
+  <div class="slider-row">
+    <span class="slider-label">Avg cost per click (CPC)</span>
+    <input type="range" min="0.50" max="6.00" step="0.25" value="2.50" id="sl-cpc">
+    <span class="slider-val" id="lbl-cpc">$2.50</span>
+  </div>
+  <div class="slider-row">
+    <span class="slider-label">Conversion rate (CVR)</span>
+    <input type="range" min="5" max="60" step="1" value="30" id="sl-cvr">
+    <span class="slider-val" id="lbl-cvr">30%</span>
+  </div>
+  <p class="hint" style="line-height:1.7;">Baseline: $1,000 ÷ $2.50 CPC = <strong style="color:#1E3A6E;">400 clicks/month</strong>. Those 400 clicks × 30% CVR = <strong style="color:#1E3A6E;">120 bookings</strong> ÷ 30 days = <strong style="color:#1E3A6E;">4 golfers/day</strong>. The 30% conversion rate is realistic for Google Search — someone who types "tee times Oro Valley" and clicks your ad is already intent on booking, not browsing. As your campaign matures and your landing page improves, CVR tends to rise and effective CPC tends to fall, compounding your results without increasing spend.</p>
 
   <hr class="divider">
 
@@ -146,7 +157,7 @@
     <div class="metric blue">
       <div class="metric-label">Golfers/day (projected)</div>
       <div class="metric-value" id="m-gpd">4.0</div>
-      <div class="metric-sub">scales with budget</div>
+      <div class="metric-sub">clicks × CVR ÷ 30</div>
     </div>
     <div class="metric blue">
       <div class="metric-label">New golfers (11 mo)</div>
@@ -185,7 +196,7 @@
     <div class="metric green">
       <div class="metric-label">Cost per golfer</div>
       <div class="metric-value" id="m-cpg">$8.33</div>
-      <div class="metric-sub">locked to baseline</div>
+      <div class="metric-sub">vs round price</div>
     </div>
   </div>
 
@@ -222,6 +233,117 @@
     <span class="pill">The Views Golf Club</span>
   </div>
 
+  <hr class="divider">
+
+  <p class="sec-title">Beyond paid ads — organic golfer acquisition</p>
+  <p style="font-size:14px; color:#444; line-height:1.75; margin-bottom:1.25rem;">The Google Ads campaign establishes a reliable, measurable baseline — $1,000/month delivers 4 new golfers per day at a proven cost of $8.33 per acquisition. But paid search is only one channel. The Views Golf Club website and Google Business Profile represent two additional acquisition levers that cost nothing per click and compound over time. Here is an honest assessment of where each stands today and what incremental golfers per day a focused improvement effort could realistically add.</p>
+
+  <p class="sec-title" style="margin-top:1.25rem;">Website &amp; landing page</p>
+  <p style="font-size:14px; color:#444; line-height:1.75; margin-bottom:0.75rem;">The current home page at theviewsgolfclub.com has a genuine visual asset — the Catalina Mountain setting and course photography — but it underperforms as a conversion tool for new golfers arriving from search. The headline "See the Views, Play the Views" is evocative without being search-relevant, and the primary tee time booking link routes to a subdomain with no visual continuity, adding drop-off risk at the most critical moment.</p>
+  <div class="insight-box"><p><strong>No geo-modified keywords in the H1 or opening paragraph.</strong> "Oro Valley" appears deep in body copy — Google and arriving visitors can't immediately confirm this is the course they searched for.</p></div>
+  <div class="insight-box"><p><strong>No pricing visible on the home page.</strong> First-time visitors deciding whether to book have to click away to find rates — a proven friction point that increases bounce rate.</p></div>
+  <div class="insight-box"><p><strong>No reviews or social proof above the fold.</strong> Trust signals are absent where they matter most — at the moment a new visitor is deciding whether to stay or leave.</p></div>
+  <div class="insight-box"><p><strong>Estimated impact: +0.5 to +1.0 golfers/day.</strong> A focused landing page built for search traffic — clear headline, current rates, one prominent booking CTA, and 3–5 customer reviews — could improve conversion rate by 1.5–2 percentage points without increasing ad spend.</p></div>
+
+  <p class="sec-title" style="margin-top:1.5rem;">Local SEO</p>
+  <p style="font-size:14px; color:#444; line-height:1.75; margin-bottom:0.75rem;">The Views has meaningful local equity — a distinctive name, active social profiles, and footer NAP. However, several high-impact local ranking factors are missing or weak, suppressing organic visibility for the search terms that matter most.</p>
+  <div class="insight-box"><p><strong>Title tag reads "Home."</strong> No course name, no city, no keyword. This is the single highest-leverage SEO fix on the entire site and takes under five minutes to change.</p></div>
+  <div class="insight-box"><p><strong>No LocalBusiness schema markup.</strong> Google cannot reliably extract structured address, hours, or service type from the page, which limits eligibility for rich results and local pack placement.</p></div>
+  <div class="insight-box"><p><strong>No Google Map embed, no explicit service area.</strong> "Oro Valley," "northwest Tucson," and "Marana" are natural geo-modifier targets that don't appear in the page copy in a structured way.</p></div>
+  <div class="insight-box"><p><strong>Estimated impact: +0.5 to +1.5 golfers/day.</strong> Local SEO compounds slowly — expect 3–6 months — but the gains are durable and reduce long-term dependence on paid spend. Fixing the title tag and adding schema are quick wins with outsized payoff.</p></div>
+
+  <p class="sec-title" style="margin-top:1.5rem;">Google Business Profile</p>
+  <p style="font-size:14px; color:#444; line-height:1.75; margin-bottom:0.75rem;">The GBP listing appears active and has reviews, which is a genuine competitive advantage. However, there are likely profile gaps that suppress local map pack visibility and reduce click-through from golfers who find the listing.</p>
+  <div class="insight-box"><p><strong>Tee time booking not connected via Reserve with Google.</strong> Golfers who find the GBP listing have to navigate away to book — connecting the booking link directly in the profile removes that friction entirely.</p></div>
+  <div class="insight-box"><p><strong>Q&amp;A section likely unanswered or unpopulated.</strong> Pre-populating Q&amp;A with common questions (rates, hours, dress code, cart fees) is a direct conversion and ranking signal that most courses ignore.</p></div>
+  <div class="insight-box"><p><strong>Service attributes and amenities may be incomplete.</strong> Driving range, pro shop, lessons, and pull cart availability all affect how the profile appears in filtered local searches.</p></div>
+  <div class="insight-box"><p><strong>Estimated impact: +0.3 to +0.8 golfers/day.</strong> GBP gains are the fastest of the three organic channels — a fully optimized profile with active photos, answered Q&amp;A, and consistent review responses can show measurable improvement in 30–60 days.</p></div>
+
+  <p class="sec-title" style="margin-top:1.5rem;">Combined organic opportunity</p>
+  <div style="overflow-x:auto; margin-bottom:1.5rem;">
+    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+      <thead>
+        <tr style="border-bottom:2px solid #d0d8e8;">
+          <th style="text-align:left; padding:8px 10px; color:#1E3A6E; font-weight:600;">Channel</th>
+          <th style="text-align:left; padding:8px 10px; color:#1E3A6E; font-weight:600;">Current state</th>
+          <th style="text-align:right; padding:8px 10px; color:#1E3A6E; font-weight:600;">Est. golfers/day</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e8e8e6;">
+          <td style="padding:8px 10px; color:#333;">Google Ads (baseline)</td>
+          <td style="padding:8px 10px; color:#666;">Active at $1,000/mo</td>
+          <td style="padding:8px 10px; text-align:right; font-weight:500; color:#1E3A6E;">4.0</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8e8e6;">
+          <td style="padding:8px 10px; color:#333;">Website / landing page</td>
+          <td style="padding:8px 10px; color:#666;">Weak conversion, missing geo-SEO</td>
+          <td style="padding:8px 10px; text-align:right; font-weight:500; color:#1E3A6E;">+0.5 to +1.0</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8e8e6;">
+          <td style="padding:8px 10px; color:#333;">Local SEO (on-page + schema)</td>
+          <td style="padding:8px 10px; color:#666;">Title tag, schema, content missing</td>
+          <td style="padding:8px 10px; text-align:right; font-weight:500; color:#1E3A6E;">+0.5 to +1.5</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e8e8e6;">
+          <td style="padding:8px 10px; color:#333;">Google Business Profile</td>
+          <td style="padding:8px 10px; color:#666;">Partially complete</td>
+          <td style="padding:8px 10px; text-align:right; font-weight:500; color:#1E3A6E;">+0.3 to +0.8</td>
+        </tr>
+        <tr style="background:#ddeaf8;">
+          <td style="padding:8px 10px; font-weight:600; color:#1E3A6E;">Total potential</td>
+          <td style="padding:8px 10px; color:#3a6aaa;">All channels combined</td>
+          <td style="padding:8px 10px; text-align:right; font-weight:600; color:#1E3A6E;">5.3 to 7.3/day</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px; color:#666; line-height:1.7; margin-bottom:1.75rem;">The paid campaign is the fastest path to 4 new golfers per day. The organic improvements are slower to materialize — expect 30–60 days for GBP gains and 3–6 months for SEO — but they reduce long-term dependence on ad spend and lower the effective cost per golfer over time. Done together, these three channels compound toward a realistic ceiling of 6–7 new golfers per day at the same $1,000/month ad investment.</p>
+
+  <p class="sec-title">Annual revenue potential by channel — 11-month campaign at $70/round</p>
+  <p style="font-size:12px; color:#888; margin-bottom:12px;">Midpoint estimates used for organic ranges. Baseline: 4 golfers/day × 330 days × $70 = $92,400.</p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin-bottom:1.25rem;">
+    <div class="metric blue">
+      <div class="metric-label">Google Ads baseline</div>
+      <div class="metric-value">$92,400</div>
+      <div class="metric-sub">4.0 golfers/day</div>
+    </div>
+    <div class="metric" style="background:#e8f5ee;">
+      <div class="metric-label" style="color:#0f6e56;">+ Website improvements</div>
+      <div class="metric-value" style="color:#085041;">$17,325</div>
+      <div class="metric-sub" style="color:#0f6e56;">+0.75/day avg × 330 × $70</div>
+    </div>
+    <div class="metric" style="background:#e8f5ee;">
+      <div class="metric-label" style="color:#0f6e56;">+ Local SEO</div>
+      <div class="metric-value" style="color:#085041;">$23,100</div>
+      <div class="metric-sub" style="color:#0f6e56;">+1.0/day avg × 330 × $70</div>
+    </div>
+    <div class="metric" style="background:#e8f5ee;">
+      <div class="metric-label" style="color:#0f6e56;">+ Google Business Profile</div>
+      <div class="metric-value" style="color:#085041;">$12,705</div>
+      <div class="metric-sub" style="color:#0f6e56;">+0.55/day avg × 330 × $70</div>
+    </div>
+    <div class="metric accent">
+      <div class="metric-label">Total potential revenue</div>
+      <div class="metric-value">$145,530</div>
+      <div class="metric-sub">6.3 golfers/day avg</div>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:16px; margin-bottom:10px; font-size:12px; color:#666; flex-wrap:wrap;">
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#1E3A6E;"></span>Google Ads baseline</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#5DCAA5;"></span>Website improvements</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#1D9E75;"></span>Local SEO</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#085041;"></span>Google Business Profile</span>
+  </div>
+  <div style="position:relative; width:100%; height:320px;">
+    <canvas id="chart2" role="img" aria-label="Stacked bar chart showing cumulative annual revenue from Google Ads baseline plus website, SEO, and GBP improvements">Annual revenue stacked by channel from baseline $92,400 up to $145,530 total.</canvas>
+  </div>
+  <p style="font-size:11px; color:#aaa; margin-top:8px; margin-bottom:1.75rem;">Organic estimates use midpoint of stated ranges. Actual results depend on implementation quality and timeline. SEO gains assumed fully realized by month 6; GBP gains by month 2.</p>
+
+  <hr class="divider">
+
   <div class="footer">
     Analysis prepared by Tall Town Design &nbsp;·&nbsp; talltowndesigns.com &nbsp;·&nbsp; Baseline: $1,000/mo = 4 golfers/day = $8.33 cost per golfer.
   </div>
@@ -234,7 +356,7 @@ const N = 11, DAYS = 30;
 const BASE_BUDGET = 1000, BASE_GPD = 4;
 const BASE_CPG = BASE_BUDGET / (BASE_GPD * DAYS);
 
-let budget = 1000, price = 70;
+let budget = 1000, price = 70, cpc = 2.50, cvr = 0.30;
 let chart1;
 
 function fmt$(n){ return '$' + Math.round(n).toLocaleString(); }
@@ -242,16 +364,18 @@ function fmtN(n){ return Math.round(n).toLocaleString(); }
 
 
 function calc(){
-  const gpd             = (budget / BASE_BUDGET) * BASE_GPD;
-  const bookingsPerMonth = gpd * DAYS;
-  const totalNewGolfers = bookingsPerMonth * N;
-  const grossRev        = totalNewGolfers * price;
-  const totalSpend      = budget * N;
-  const dailyCost       = budget / DAYS;
-  const net             = grossRev - totalSpend;
-  const roas            = grossRev / totalSpend;
-  const revenuePerMonth = bookingsPerMonth * price;
-  return { gpd, totalNewGolfers, grossRev, totalSpend, dailyCost, net, roas, revenuePerMonth };
+  const clicksPerMonth   = budget / cpc;
+  const bookingsPerMonth = clicksPerMonth * cvr;
+  const gpd              = bookingsPerMonth / DAYS;
+  const totalNewGolfers  = bookingsPerMonth * N;
+  const grossRev         = totalNewGolfers * price;
+  const totalSpend       = budget * N;
+  const dailyCost        = budget / DAYS;
+  const net              = grossRev - totalSpend;
+  const roas             = grossRev / totalSpend;
+  const cpg              = totalSpend / totalNewGolfers;
+  const revenuePerMonth  = bookingsPerMonth * price;
+  return { gpd, totalNewGolfers, grossRev, totalSpend, dailyCost, net, roas, cpg, revenuePerMonth };
 }
 
 
@@ -264,7 +388,7 @@ function updateMetrics(d){
   document.getElementById('m-daily').textContent     = fmt$(d.dailyCost);
   document.getElementById('m-net').textContent       = fmt$(d.net);
   document.getElementById('m-roas').textContent      = d.roas.toFixed(1) + '×';
-  document.getElementById('m-cpg').textContent       = '$' + BASE_CPG.toFixed(2);
+  document.getElementById('m-cpg').textContent       = '$' + d.cpg.toFixed(2);
 }
 
 function updateChart(d){
@@ -315,10 +439,50 @@ function bind(id, lblId, fmt, setter){
   });
 }
 
-bind('sl-budget',       'lbl-budget',       v => fmt$(v),                v => budget      = v);
-bind('sl-price',        'lbl-price',        v => '$' + v,                v => price       = v);
+bind('sl-budget', 'lbl-budget', v => fmt$(v),           v => budget = v);
+bind('sl-price',  'lbl-price',  v => '$' + v,           v => price  = v);
+bind('sl-cpc',    'lbl-cpc',    v => '$' + v.toFixed(2),v => cpc    = v);
+bind('sl-cvr',    'lbl-cvr',    v => v + '%',           v => cvr    = v / 100);
 
 update();
+
+(function initRevenueChart(){
+  const channels = ['Google Ads baseline', 'Add website improvements', 'Add local SEO', 'Add GBP optimization'];
+  const baseline = 92400;
+  const webAdd   = 17325;
+  const seoAdd   = 23100;
+  const gbpAdd   = 12705;
+
+  const totalByBar = [baseline, baseline+webAdd, baseline+webAdd+seoAdd, baseline+webAdd+seoAdd+gbpAdd];
+
+  new Chart(document.getElementById('chart2'), {
+    type: 'bar',
+    data: {
+      labels: channels,
+      datasets: [
+        { label: 'Google Ads baseline',     data: [baseline, baseline, baseline, baseline], backgroundColor: '#1E3A6E' },
+        { label: 'Website improvements',    data: [0, webAdd, webAdd, webAdd],              backgroundColor: '#5DCAA5' },
+        { label: 'Local SEO',               data: [0, 0, seoAdd, seoAdd],                  backgroundColor: '#1D9E75' },
+        { label: 'Google Business Profile', data: [0, 0, 0, gbpAdd],                       backgroundColor: '#085041' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            afterBody: items => ['', 'Bar total: $' + totalByBar[items[0].dataIndex].toLocaleString()]
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { color: '#888', font: { size: 11 }, maxRotation: 0 } },
+        y: { stacked: true, max: 160000, grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { color: '#888', callback: v => '$' + (v/1000).toFixed(0) + 'k' } }
+      }
+    }
+  });
+})();
 </script>
 </body>
 </html>
